@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotka-Volterra Simulation</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Lotka-Volterra Equations</h1>
+        <p class="subtitle">dx/dt = αx - βxy &nbsp; | &nbsp; dy/dt = δxy - γy</p>
+    </header>
+
+    <div class="equations-display">
+        <div class="equation-card prey">
+            <div class="equation-title">Prey Population</div>
+            <div class="equation">
+                \[\frac{dx}{dt} = \alpha x - \beta xy\]
+            </div>
+            <div class="equation-description">
+                <span class="growth">Growth rate</span>
+                <span class="death">Predation loss</span>
+            </div>
+        </div>
+        <div class="equation-card predator">
+            <div class="equation-title">Predator Population</div>
+            <div class="equation">
+                \[\frac{dy}{dt} = \delta xy - \gamma y\]
+            </div>
+            <div class="equation-description">
+                <span class="growth">Reproduction from predation</span>
+                <span class="death">Natural death</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="card">
+            <div class="card-header">
+                <h2>System Parameters</h2>
+            </div>
+            <div class="card-body">
+                <form id="simulationForm">
+                    <div class="form-group">
+                        <label for="alpha">α [Prey Growth Rate]</label>
+                        <input type="number" id="alpha" value="0.1" step="0.01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="beta">β [Predation Rate]</label>
+                        <input type="number" id="beta" value="0.02" step="0.01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gamma">γ [Predator Death Rate]</label>
+                        <input type="number" id="gamma" value="0.3" step="0.01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="delta">δ [Predator Growth Rate]</label>
+                        <input type="number" id="delta" value="0.01" step="0.01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="x0">x₀ [Initial Prey]</label>
+                        <input type="number" id="x0" value="40">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="y0">y₀ [Initial Predator]</label>
+                        <input type="number" id="y0" value="9">
+                    </div>
+                    
+                    <button type="submit" class="btn">Execute Simulation</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card chart-card">
+            <div class="card-header">
+                <h2>Phase-Space Diagram</h2>
+            </div>
+            <div class="card-body">
+                <canvas id="simulationChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p> Prey Predator Ecosystem Simulator</p>
+        <p class="creator">Created by <a href="https://jasonbrar.vercel.app/" target="_blank" class="author-link"><span class="author-name">Jason Brar</span></a></p>
+    </footer>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        displayAlign: "center"
+    });
+    
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            document.querySelectorAll('.equation-card').forEach(function(card) {
+                card.classList.add('visible');
+            });
+        }, 300);
+    });
+</script>
+</body>
+</html>

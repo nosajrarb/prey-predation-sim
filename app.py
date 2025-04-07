@@ -9,7 +9,6 @@ def index():
 
 @app.route('/simulate', methods=['POST'])
 def simulate():
-    # Get parameters from the form
     alpha = float(request.form['alpha'])
     beta = float(request.form['beta'])
     gamma = float(request.form['gamma'])

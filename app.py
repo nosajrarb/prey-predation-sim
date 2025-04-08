@@ -39,9 +39,8 @@ def simulate():
     }
     return jsonify(result)
 
-# This is for local development
+
 if __name__ == '__main__':
     app.run(debug=True)
 
-# For Vercel deployment
-# The Vercel serverless function handler will use app directly
+
